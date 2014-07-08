@@ -1,0 +1,62 @@
+<#include "./common/_layout.html"/> <@layout>
+
+
+<ul class="breadcrumb">
+	<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+	<li class="active">Users</li>
+</ul>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="btn-toolbar">
+			<button class="btn btn-primary">
+				<i class="icon-plus"></i> New User
+			</button>
+			<button class="btn">Import</button>
+			<button class="btn">Export</button>
+			<div class="btn-group"></div>
+		</div>
+		<div class="well">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+						<th style="width: 26px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				    <#list articles.list as article>
+				    <tr>
+						<td>${article.id}</td>
+						<td>${article.title}</td>
+						<td>${article._createDateTime}</td>
+						<td>${article._updateDateTime}</td>
+						<td><a href="user.html"><i class="icon-pencil"></i></a> <a
+							href="#myModal" role="button" data-toggle="modal"><i
+								class="icon-remove"></i></a></td>
+					</tr>
+				    </#list>
+					
+				</tbody>
+			</table>
+		</div>
+		<@pagination pageNum=articles.pageNumber totalPage=articles.totalPage/>
+
+		<footer>
+			<hr>
+			<p class="pull-right">
+				THE Bootstrap Theme POWER BY <a href="http://www.portnine.com" target="_blank">Portnine</a>
+			</p>
+			<p>
+				&copy; 2014 <a href="http://www.huangyicheng.com" target="_blank">huangyicheng</a>
+			</p>
+		</footer>
+	</div>
+</div>
+
+<script>
+	
+</script>
+			</@layout>

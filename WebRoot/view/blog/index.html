@@ -1,0 +1,67 @@
+<#include "_layout.html"/> <@layout> </@layout>
+<link href="${path}/static/css/pagination.css" rel="stylesheet" type="text/css">
+<div class="wrap clearfix">
+	<div class="left">
+		<!-- 博客列表 -->
+		<#list articles.list as blog>
+		<div class="con">
+			<div class="tit clearfix">
+				<span class="note_icon"></span> <a
+					href="${path}/article/${blog.id}.html">${blog.title}</a>
+			</div>
+			<div class="text">
+				<div class="infor_tag">
+					<#list blog._tags as tag> 
+					  <a title="${tag}" href="${path}/tag/${tag}.html" class="tag" rel="tag"> 
+					  <span>${tag}</span>
+					  </a> 
+					</#list>
+				</div>
+				${blog.brief}
+				
+			</div>
+			<div class="info clearfix">
+				<div class="fr">
+					<span class="author">knife</span> <span class="time">${blog._createDateTime}发表</span>
+					<span class="edit">${blog._updateDateTime}更新</span> <span
+						class="views" title="浏览次数">${blog.viewCount}次浏览</span> <a
+						class="comment" href="#" title="评论">${blog.replyCount}</a>
+				</div>
+			</div>
+		</div>
+		</#list> 
+		    <@pagination pageNum=articles.pageNumber totalPage=articles.totalPage/>
+		
+	</div>
+	<div class="right">
+		<h3>文章分类</h3>
+		<div class="tag">
+			<#list categorys as category> <a
+				href="${path}/categorySuper/${category.id}.html">${category.name}<span>${category.num}</span></a>
+			</#list>
+		</div>
+
+		<h3>热门文章</h3>
+		<div class="hot_blog">
+		</div>
+
+		<h3>最新评论</h3>
+		<ul class="comment">
+			<li>
+				<div></div>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="footer">
+	<a href="#" class="weibo">Weibo</a> <a
+		href="https://github.com/robbin" class="github">Github</a> <a
+		href="#" class="mail">Email</a>
+	<div class="powered-by">
+		<a href="http://huangyicheng.com" title="knife's blog">Powered by
+			huangyicheng</a>
+	</div>
+</div>
+
+
+

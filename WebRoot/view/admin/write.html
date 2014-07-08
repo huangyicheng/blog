@@ -1,0 +1,105 @@
+<#include "./common/_layout.html"/>
+<link rel="stylesheet" href="${path}/view/admin/static/css/writer.css">
+
+<link rel="stylesheet" type="text/css" media="screen, projection" href="${path}/static/js/markdown/editor/stylesheets/main.css" />
+<link rel="stylesheet" type="text/css" media="screen, projection" href="${path}/static/js/markdown/editor/stylesheets/markdown.css" />
+<link rel="stylesheet" type="text/css" media="screen, projection" href="${path}/static/js/markdown/editor/stylesheets/highlight.css" />
+
+<script type="text/javascript" src="${path}/static/js/markdown/editor/javascripts/marked.js"></script>
+<script type="text/javascript" src="${path}/static/js/markdown/editor/javascripts/highlight.js"></script>
+<script type="text/javascript" src="${path}/static/js/markdown/editor/javascripts/blob.js"></script>
+<script type="text/javascript" src="${path}/static/js/markdown/editor/javascripts/filesaver.js"></script>
+<script type="text/javascript" src="${path}/static/js/markdown/editor/javascripts/main.js"></script>
+<@layout>
+
+
+<!-- <ul class="breadcrumb">
+	<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+	<li><a href="users.html">Users</a> <span class="divider">/</span></li>
+	<li class="active">User</li>
+</ul> -->
+<div class="container-fluid">
+	<div class="row-fluid"> 
+		<div class="btn-toolbar">
+			<button class="btn btn-primary" id="save">
+				<i class="icon-save"></i>保存
+			</button>
+			<a href="#myModal" data-toggle="modal" class="btn" id="cancel">取消</a>
+			<div class="btn-group"></div>
+		</div> 
+		<div class="well">
+		    <input type="text" id="title"  class="title" name="note_name" type="text" value="标题" style="width:800px;height:40px;margin-left:100px;">
+            <label style="margin-left:100px;">
+            	<input type="text"  id="tags" class="tags" value="标签 (用#分隔多个标签)" style="width:380px;height:30px;margin-right:30px;">&nbsp;
+          	    <select name="" id="category" class="tags" style="width:380px;height:30px;">
+          	    <#list categorys as category>
+          	        <option value="${category.id}">${category.name}</option>
+          	    </#list>
+          	    </select>
+        	</label>
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#home" data-toggle="tab">写作</a></li>
+				<li><a href="#profile" data-toggle="tab">预览</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane active in" id="home">
+					<form id="tab">
+						<textarea id="editor_code" wrap="off" style="width:100%;height:400px;"></textarea>
+					</form>
+				</div>
+				<div class="tab-pane fade" id="profile">
+					<form id="tab2">
+						
+						<div id="preview_code"></div>
+						
+					</form>
+				</div>
+			</div>        
+		</div>
+		<footer>
+			<hr>
+			<p class="pull-right">
+				THE Bootstrap Theme POWER BY <a href="http://www.portnine.com" target="_blank">Portnine</a>
+			</p>
+			<p>
+				&copy; 2014 <a href="http://www.huangyicheng.com" target="_blank">huangyicheng</a>
+			</p>
+		</footer>
+	</div>
+</div>
+
+
+<script>
+	MarkdownEditor.init();
+	$("#title").focus(function() {
+		if ($(this).val() == "标题")
+			$(this).val("");
+	}).blur(function() {
+		if ($(this).val() == "")
+			$(this).val("标题");
+	});
+	$("#tags").focus(function() {
+		if ($(this).val() == "标签 (用#分隔多个标签)")
+			$(this).val("");
+	}).blur(function() {
+		if ($(this).val() == "")
+			$(this).val("标签 (用#分隔多个标签)");
+	});
+	$("#save").click(function() {
+		var data = {};
+		data['article.title'] = $('#title').val();
+		data['article.tags'] = $('#tags').val();
+		data['article.content'] = marked($('#editor_code').val());
+		data['article.category'] = $('#category').val();
+		$.post('${path}/admin/post', data, function(data) {
+			alert("success");
+		});
+	});
+	$("#cancel").click(function() {
+
+		console.log($('#editor_code').val());
+		var html = marked($('#editor_code').val());
+		console.log(html);
+	});
+</script>
+</@layout>
